@@ -1,7 +1,24 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://developers.themoviedb.org/3/';
+const API_KEY = '6fa4e59bc2ff4c4e723c5e57b4e6f0ea';
 
-export class API {
-  getTrend() {}
-}
+export const getTrendMovies = async () => {
+  const { data } = await axios.get(`
+https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`);
+  return data;
+};
+
+export const getMoviesByName = async query => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${API_KEY}&language=en-US&page=1&include_adult=false`
+  );
+
+  return data;
+};
+
+export const getMovieInfo = async id => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
+  );
+  return data;
+};

@@ -1,68 +1,41 @@
-import React from 'react';
-import styled from 'styled-components';
-import SearchLogo from '../imgs/search.svg';
+import React, { useEffect, useState } from 'react';
+import { getMoviesByName } from 'service/API';
+import { useSearchParams } from 'react-router-dom';
+
+import SearchForm from 'components/SearchForm/SearchForm';
+import MovieList from 'components/MovieList/MovieList';
+
 const MoviesPage = () => {
+  const [movies, setMovies] = useState([]);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const query = searchParams.get('query');
+
+  const onSubmitSetParams = query => {
+    setSearchParams({ query });
+  };
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const { results } = await getMoviesByName(query);
+        setMovies(results);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (query) {
+      fetchMovies();
+    }
+  }, [query]);
+
   return (
-    <InputForm>
-      <StyledInput
-        type="input"
-        placeholder="Name"
-        name="movie"
-        id="movie"
-        required
-        autoComplete="off"
-      />
-      <StyledLabel for="movie">Movie</StyledLabel>
-      <StyledButton type="submit">
-        <img src={SearchLogo} alt="" width="20px" height="20px" />
-      </StyledButton>
-    </InputForm>
+    <>
+      <SearchForm onSubmit={onSubmitSetParams} />
+      <MovieList items={movies} />
+    </>
   );
 };
 
-const InputForm = styled.form`
-  position: relative;
-  padding: 15px 0 0;
-  margin-top: 10px;
-  width: 300px;
-`;
-
-const StyledInput = styled.input`
-  font-family: inherit;
-  width: 260px;
-  border: 0;
-  border-bottom: 2px solid black;
-  outline: 0;
-  font-size: 1.3rem;
-  color: white;
-  padding: 7px 0;
-  background: transparent;
-  transition: border-color 0.2s;
-
-  &::placeholder {
-    color: transparent;
-  }
-
-  &:placeholder-shown ~ label {
-    font-size: 1.3rem;
-    cursor: text;
-    top: 20px;
-  }
-`;
-
-const StyledLabel = styled.label`
-  position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  font-size: 1rem;
-  color: black;
-`;
-
-const StyledButton = styled.button`
-  border: none;
-  border-radius: 5px;
-  background-color: transparent;
-  cursor: pointer;
-`;
 export default MoviesPage;
