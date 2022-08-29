@@ -8,7 +8,7 @@ const Wrapper = ({ children }) => {
 export default Wrapper;
 
 const StyledWrapper = styled.div`
-  margin: 50px 50px;
+  margin: 50px 50px 0;
   padding: 5px 10px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;

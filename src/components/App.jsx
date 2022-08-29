@@ -5,6 +5,8 @@ import HomePage from 'pages/HomePage';
 import MoviesPage from 'pages/MoviesPage';
 import MovieInfoPage from 'pages/MovieInfoPage';
 import Wrapper from 'base/Wrapper/Wrapper';
+import MovieReviews from './MovieReviews/MovieReviews';
+import MovieCast from './MovieCast/MovieCast';
 
 export const App = () => {
   return (
@@ -15,8 +17,8 @@ export const App = () => {
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/movies" element={<MoviesPage />}></Route>
           <Route path="/movies/:id" element={<MovieInfoPage />}>
-            <Route path="cast" element={<div>Hello Cast</div>} />
-            <Route path="reviews" element={<div>Hello reviews</div>} />
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
           </Route>
         </Routes>
       </Wrapper>
