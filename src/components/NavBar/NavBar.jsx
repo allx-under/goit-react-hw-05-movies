@@ -1,17 +1,24 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import './navBar.css';
 
 const NavBar = () => {
   return (
     <WrapperBar>
       <StyledBar>
-        <StyledBarItem>
-          <StyledBarLink to="/">Home</StyledBarLink>
-        </StyledBarItem>
-        <StyledBarItem>
-          <StyledBarLink to="/movies">Movies</StyledBarLink>
-        </StyledBarItem>
+        <NavLink
+          className={({ isActive }) => 'link' + (isActive ? ' active' : '')}
+          to="/"
+        >
+          Home
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => 'link' + (isActive ? ' active' : '')}
+          to="/movies"
+        >
+          Movies
+        </NavLink>
       </StyledBar>
     </WrapperBar>
   );
@@ -21,7 +28,7 @@ const WrapperBar = styled.div`
   display: flex;
   justify-content: center;
 `;
-const StyledBar = styled.ul`
+const StyledBar = styled.div`
   border-radius: 25px;
   height: fit-content;
   display: inline-flex;
@@ -33,42 +40,41 @@ const StyledBar = styled.ul`
   margin: 50px 0 0 0;
 `;
 
-const StyledBarItem = styled.li`
-        list-style: none;
-        color: white;
-  		padding: 12px 16px;
-  		margin: 0 8px;
-  		position: relative;
-  		cursor: pointer;
-  		white-space: nowrap;
-  		&::before {
-  			content: " ";
-  			position: absolute;
-  			top: 0;
-  			left:0;
-  			height:100%;
-  			width: 100%;
-  			z-index:-1;
-  			transition: .2s;
-  			border-radius: 25px;
-  		}
-  			&:hover {
-  				&::before {
-  					background: linear-gradient(to bottom, #e8edec, #d2d1d3);
-  						box-shadow: 0px 3px 20px 0px black;
-  						transform: scale(1.2);
-  				}
-  				color: black;
-  		}
-  	}
-  }
-`;
+// const StyledBarLink = styled(NavLink)`
+//   text-decoration: none;
+//   color: white;
+//   font-weight: bold;
+//   padding: 12px 16px;
+//   margin: 0 8px;
+//   position: relative;
+//   cursor: pointer;
+//   white-space: nowrap;
+//   &::before {
+//     content: ' ';
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     height: 100%;
+//     width: 100%;
+//     z-index: -1;
+//     transition: 0.2s;
+//     border-radius: 25px;
+//   }
+//   &:hover {
+//     &::before {
+//       background: linear-gradient(to bottom, #e8edec, #d2d1d3);
+//       box-shadow: 0px 3px 20px 0px black;
+//       transform: scale(1.2);
+//     }
+//     color: black;
+//   }
+// `;
 
-const StyledBarLink = styled(NavLink)`
-  color: inherit;
-  font-family: sans-serif;
-  font-weight: bold;
-  text-decoration: none;
-`;
+// const StyledBarLink = styled(NavLink)`
+//   color: inherit;
+//   font-family: sans-serif;
+//   font-weight: bold;
+//   text-decoration: none;
+// `;
 
 export default NavBar;

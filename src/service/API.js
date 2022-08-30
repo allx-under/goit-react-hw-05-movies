@@ -4,7 +4,7 @@ const API_KEY = '6fa4e59bc2ff4c4e723c5e57b4e6f0ea';
 
 export const getTrendMovies = async () => {
   const { data } = await axios.get(`
-https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`);
+https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`);
   return data;
 };
 

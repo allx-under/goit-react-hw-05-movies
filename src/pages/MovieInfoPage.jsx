@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet, useParams } from 'react-router-dom';
-import { getMovieInfo } from 'service/API';
 import styled from 'styled-components';
+
+import { getMovieInfo } from 'service/API';
+import Loader from 'service/Loader';
 
 const MovieInfoPage = () => {
   const [movie, setMovie] = useState({});
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
     const fetchMovieInfo = async () => {
       try {
+        setLoading(true);
         const data = await getMovieInfo(id);
         setMovie(data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
       //   setMovie(data)
     };
@@ -28,14 +34,21 @@ const MovieInfoPage = () => {
     poster_path,
     release_date,
   } = movie;
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <Wrapper>
-        <StyledImg
-          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-          alt={original_title}
-          width="300px"
-        />
+        {poster_path && (
+          <StyledImg
+            src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+            alt={original_title}
+            width="300px"
+          />
+        )}
         <div>
           <h2>
             {original_title} ({release_date?.slice(0, 4)})

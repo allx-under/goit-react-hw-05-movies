@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
 import SearchLogo from '../../imgs/search.svg';
 
 const SearchForm = ({ onSubmit }) => {
@@ -33,6 +35,10 @@ const SearchForm = ({ onSubmit }) => {
       </StyledButton>
     </InputForm>
   );
+};
+
+SearchForm.propTypes = {
+  onSubmit: PropTypes.func,
 };
 
 const InputForm = styled.form`
