@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import styled from 'styled-components';
 
 import { getMovieInfo } from 'service/API';
@@ -9,6 +15,15 @@ const MovieInfoPage = () => {
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from || '/movies';
+
+  const goBack = () => {
+    navigate(from);
+  };
 
   useEffect(() => {
     const fetchMovieInfo = async () => {
@@ -41,6 +56,9 @@ const MovieInfoPage = () => {
 
   return (
     <>
+      <StyledBtn onClick={goBack} type="button">
+        Go Back
+      </StyledBtn>
       <Wrapper>
         {poster_path && (
           <StyledImg
@@ -68,11 +86,15 @@ const MovieInfoPage = () => {
           <h3>Additional information</h3>
           <ul>
             <li>
-              <Link to="cast">Cast</Link>
+              <Link state={{ from }} to="cast">
+                Cast
+              </Link>
             </li>
             <li>
               {' '}
-              <Link to="reviews">Reviews</Link>
+              <Link state={{ from }} to="reviews">
+                Reviews
+              </Link>
             </li>
           </ul>
         </div>
@@ -93,4 +115,20 @@ const StyledImg = styled.img`
   border-radius: 10px;
   margin: 10px;
   margin-right: 20px;
+`;
+
+const StyledBtn = styled.button`
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0;
+  margin-left: 10px;
+  margin-top: 5px;
+  padding: 5px;
+  color: white;
+  background: rgba(0, 0, 0, 0.6);
+  &:hover {
+    color: black;
+    background: linear-gradient(to bottom, #e8edec, #d2d1d3);
+  }
 `;

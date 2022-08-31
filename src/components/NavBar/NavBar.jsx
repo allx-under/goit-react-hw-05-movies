@@ -70,11 +70,4 @@ const StyledBar = styled.div`
 //   }
 // `;
 
-// const StyledBarLink = styled(NavLink)`
-//   color: inherit;
-//   font-family: sans-serif;
-//   font-weight: bold;
-//   text-decoration: none;
-// `;
-
 export default NavBar;
