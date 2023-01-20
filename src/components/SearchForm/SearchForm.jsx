@@ -45,17 +45,17 @@ const InputForm = styled.form`
   position: relative;
   padding: 15px 0 0;
   margin-top: 10px;
-  width: 300px;
+  width: 400px;
 `;
 
 const StyledInput = styled.input`
   font-family: inherit;
-  width: 260px;
+  width: 365px;
   border: 0;
   border-bottom: 2px solid black;
   outline: 0;
   font-size: 1.3rem;
-  color: white;
+  color: #645a56;
   padding: 7px 0;
   background: transparent;
   transition: border-color 0.2s;

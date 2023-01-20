@@ -32,13 +32,13 @@ const MovieCast = () => {
       {cast.map(({ character, id, name, profile_path }) => (
         <li key={id}>
           {profile_path ? (
-            <img
+            <StyledImg
               src={`https://image.tmdb.org/t/p/w500${profile_path}`}
               alt={name}
               width="150px"
             />
           ) : (
-            <img
+            <StyledImg
               src={
                 'https://media.istockphoto.com/vectors/no-image-available-icon-vector-id1216251206?k=20&m=1216251206&s=170667a&w=0&h=A72dFkHkDdSfmT6iWl6eMN9t_JZmqGeMoAycP-LMAw4='
               }
@@ -65,4 +65,8 @@ const StyledList = styled.ul`
 
   grid-gap: 1rem;
   list-style: none;
+`;
+
+const StyledImg = styled.img`
+  border-radius: 5px;
 `;

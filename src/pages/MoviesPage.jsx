@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { getMoviesByName } from 'service/API';
 import Loader from 'service/Loader';
@@ -39,11 +40,18 @@ const MoviesPage = () => {
   }
 
   return (
-    <>
+    <Container>
       <SearchForm onSubmit={onSubmitSetParams} />
-      <MovieList items={movies} />
-    </>
+      <MovieList items={movies} query={query} />
+    </Container>
   );
 };
 
 export default MoviesPage;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;

@@ -14,7 +14,7 @@ export const App = () => {
   return (
     <Suspense fallback={null}>
       <Container>
-        <NavBar />
+        <NavBar toCenter={true} />
         <Wrapper>
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
